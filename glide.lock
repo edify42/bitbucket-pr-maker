@@ -1,0 +1,51 @@
+hash: 5101346c787a6595b01200df74d67e7393dff7838b1325b12e634a4821237945
+updated: 2019-03-18T16:43:30.732176+11:00
+imports:
+- name: github.com/alecthomas/template
+  version: a0175ee3bccc567396460bf5acd36800cb10c49c
+  subpackages:
+  - parse
+- name: github.com/alecthomas/units
+  version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
+- name: github.com/golang/protobuf
+  version: 748d386b5c1ea99658fd69fe9f03991ce86a90c1
+  subpackages:
+  - proto
+- name: github.com/k0kubun/pp
+  version: 279f45494e39ad62fd1f3d089dddb8a49ed52f4e
+- name: github.com/ktrysmt/go-bitbucket
+  version: 1f1c5e77687102cc8f6baa9f79276178be6f0ea3
+- name: github.com/mattn/go-colorable
+  version: 3a70a971f94a22f2fa562ffcc7a0eb45f5daf045
+- name: github.com/mattn/go-isatty
+  version: c2a7a6ca930a4cd0bc33a3f298eb71960732a3a7
+- name: github.com/mitchellh/mapstructure
+  version: 00c29f56e2386353d58c599509e8dc3801b0d716
+- name: golang.org/x/net
+  version: 69d4b8aa71caaaa75c3dfc11211d1be495abec7c
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: golang.org/x/oauth2
+  version: e64efc72b421e893cbf63f17ba2221e7d6d0b0f3
+  subpackages:
+  - bitbucket
+  - clientcredentials
+  - internal
+- name: golang.org/x/sys
+  version: a2f829d7f35f2ed1c3520c553a6226495455cae0
+  subpackages:
+  - unix
+- name: google.golang.org/appengine
+  version: 54a98f90d1c46b7731eb8fb305d2a321c30ef610
+  subpackages:
+  - internal
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
+- name: gopkg.in/alecthomas/kingpin.v2
+  version: 947dcec5ba9c011838740e680966fd7087a71d0d
+testImports: []

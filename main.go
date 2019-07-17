@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -50,5 +51,73 @@ func main() {
 		fmt.Println(res)
 		panic(err)
 	}
+	//	fmt.Println(reflect.TypeOf(res).PkgPath(), reflect.TypeOf(res).Name())
+	// myMap := reflect.ValueOf(res)
+	// for _, e := range myMap.MapKeys() {
+	// 	thing := e["test"]
+	// 	//fmt.Println(v)
+	// }
+	// m := make(map[string]interface{})
+	// myMap := reflect.ValueOf(res)
+	// for _, e := range myMap.MapKeys() {
+	// 	m[e.String()] = myMap.Elem()
+	// }
+	// fmt.Println(m)
+	byteData, _ := json.Marshal(res)
+	//var t Message
+	//json.Unmarshal(byteData, &t.Data)
+	// fmt.Println(string(byteData))
+	jsonMap := make(map[string]interface{})
+	err = json.Unmarshal(byteData, &jsonMap)
+	if err != nil {
+		panic(err)
+	}
+	// fetchkey("html", jsonMap)
 
+	a := getMap("links", jsonMap)
+	b := getMap("html", a)
+	d := b["href"]
+	fmt.Println(d)
+}
+
+// dumpmap to stdout...is messy
+func dumpMap(space string, m map[string]interface{}) {
+	for k, v := range m {
+		if mv, ok := v.(map[string]interface{}); ok {
+			fmt.Printf("{ \"%v\": \n", k)
+			dumpMap(space+"\t", mv)
+			fmt.Printf("}\n")
+		} else {
+			fmt.Printf("%v %v : %v\n", space, k, v)
+		}
+	}
+}
+
+func getMap(key string, m map[string]interface{}) map[string]interface{} {
+	for k, v := range m {
+		if k == key {
+			thing, ok := v.(map[string]interface{})
+			if !ok {
+				// Can't assert, handle error.
+				fmt.Println("cant assert onthing at all")
+			}
+			return thing
+		}
+	}
+	return nil
+}
+
+// fetchkey to stdout...is messy
+func fetchkey(space string, m map[string]interface{}) {
+	for k, v := range m {
+		if k != space {
+			if mv, ok := v.(map[string]interface{}); ok {
+				fetchkey(space, mv)
+			} else {
+				fmt.Printf("%v %v : %v\n", space, k, v)
+			}
+		} else {
+			fmt.Printf("%v %v : %v\n", space, k, v)
+		}
+	}
 }

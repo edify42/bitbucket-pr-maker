@@ -1,6 +1,0 @@
-package: github.com/edify42/bitbucket-pr-maker
-import:
-- package: gopkg.in/alecthomas/kingpin.v2
-  version: ~2.2.6
-- package: github.com/ktrysmt/go-bitbucket
-  version: ^0.4.1

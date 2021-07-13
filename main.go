@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	bitbucket "github.com/ktrysmt/go-bitbucket"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
@@ -36,6 +37,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	var reviewers []string
+	r := os.Getenv("reviewers")
+	if r != "" {
+		reviewers = strings.Split(r, ",")
+	}
+
 	opt := &bitbucket.PullRequestsOptions{
 		Owner:             *owner,
 		RepoSlug:          *reposlug,
@@ -44,11 +51,12 @@ func main() {
 		Title:             *title,
 		Description:       *description,
 		CloseSourceBranch: *closeSource,
+		Reviewers:         reviewers,
 	}
 
 	res, err := c.Repositories.PullRequests.Create(opt)
 	if err != nil {
-		fmt.Println(res)
+		fmt.Printf("%v", res)
 		panic(err)
 	}
 	//	fmt.Println(reflect.TypeOf(res).PkgPath(), reflect.TypeOf(res).Name())

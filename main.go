@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"net/url"
 	"os"
 	"strings"
 
@@ -53,7 +55,11 @@ func main() {
 		CloseSourceBranch: *closeSource,
 		Reviewers:         reviewers,
 	}
-
+	url, err := url.Parse("http://localhost:8080")
+	if err != nil {
+		log.Fatal(err)
+	}
+	c.SetApiBaseURL(*url)
 	res, err := c.Repositories.PullRequests.Create(opt)
 	if err != nil {
 		fmt.Printf("%v", res)

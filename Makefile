@@ -1,8 +1,5 @@
-deps: 
-	glide install
-
-build: deps
+build:
 	go build
 
-install: deps
+install:
 	go install

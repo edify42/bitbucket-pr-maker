@@ -16,7 +16,7 @@ var (
 	reposlug     = kingpin.Flag("repo", "git repo").Required().Short('r').String()
 	sourceBranch = kingpin.Flag("sourceBranch", "source pr branch").Short('s').Required().String()
 	title        = kingpin.Flag("title", "title of pr").Required().Short('t').String()
-
+	draft        = kingpin.Flag("draft", "create a draft or proper PR").Default("false").Bool()
 	// non-required args/flags
 	closeSource       = kingpin.Flag("closeSource", "boolean switch to close source branch after merge").Default("true").Bool()
 	destinationBranch = kingpin.Arg("destinationBranch", "destination pr branch (default is master)").Default("master").String()
@@ -52,6 +52,7 @@ func main() {
 		Description:       *description,
 		CloseSourceBranch: *closeSource,
 		Reviewers:         reviewers,
+		Draft:             *draft,
 	}
 
 	res, err := c.Repositories.PullRequests.Create(opt)
